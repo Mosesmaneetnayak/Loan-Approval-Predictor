@@ -6,11 +6,11 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) 
 [![GitHub Issues](https://img.shields.io/github/issues/your-username/loan-approval-system)](https://github.com/your-username/loan-approval-system/issues)
 
-An end-to-end ML system predicting **loan approval status in real time**, with:
+An end-to-end ML system that predicts **loan approval status in real-time**, featuring:
 
-- REST API deployment
-- Responsive frontend interface
-- Data visualization
+- REST API deployment with FastAPI  
+- Responsive frontend interface  
+- Dataset visualization  
 - Production-style architecture  
 
 ---
@@ -25,6 +25,7 @@ An end-to-end ML system predicting **loan approval status in real time**, with:
 6. [Installation & Setup](#🛠-installation--setup)  
 7. [Experimental Model Lab](#🧪-experimental-model-lab)  
 8. [Final Statement](#⚡-final-statement)  
+9. [Repository Structure](#📂-repository-structure)  
 
 ---
 
@@ -33,15 +34,15 @@ An end-to-end ML system predicting **loan approval status in real time**, with:
 | Attribute | Details |
 |-----------|---------|
 | **Project Type** | Complete ML Deployment Pipeline |
-| **Core Purpose** | Real-time Loan Approval Prediction |
-| **Key Capabilities** | Model training, serialization, API deployment, frontend integration, dataset visualization |
+| **Purpose** | Real-time Loan Approval Prediction |
+| **Capabilities** | Model training, serialization, API deployment, frontend integration, dataset visualization |
 | **Tech Stack** | FastAPI, scikit-learn, pandas, HTML/CSS/JS |
 
 ---
 
 # 🏗 System Architecture
 
-**End-to-End Flow:**
+**End-to-End Flow:**  
 
 ```text
 User → Frontend → Fetch API → FastAPI Backend → Preprocessing → Logistic Regression → Prediction → JSON Response → Frontend Rendering
@@ -51,14 +52,14 @@ User → Frontend → Fetch API → FastAPI Backend → Preprocessing → Logist
 
 | Component | Role |
 |-----------|------|
-| User (Browser) | Initiates request, inputs financial data |
+| User (Browser) | Inputs loan application data |
 | Frontend (HTML/CSS/JS) | Captures input, renders dynamic UI |
-| Fetch API | Sends JSON data to backend |
-| FastAPI Backend | Handles requests, routes to prediction endpoint |
-| Preprocessing Pipeline | Encodes, scales, aligns features |
-| Logistic Regression Model | Classifies loan approval |
-| Prediction + Probability | Generates decision & confidence |
-| JSON Response | Frontend dynamically updates UI |
+| Fetch API | Sends data as JSON to backend |
+| FastAPI Backend | Handles `/predict` and `/plot` endpoints |
+| Preprocessing | Encodes categorical data, scales features |
+| Logistic Regression Model | Predicts loan approval |
+| Prediction + Probability | Returns approval decision & probability |
+| JSON Response | Frontend dynamically updates UI with results |
 
 ---
 
@@ -66,10 +67,10 @@ User → Frontend → Fetch API → FastAPI Backend → Preprocessing → Logist
 
 | Feature | Description |
 |---------|-------------|
-| **Real-Time Loan Prediction** | Accepts user input and returns loan approval status + probability |
-| **ML Pipeline** | Handles missing values, categorical encoding, feature alignment, classification, probability output |
-| **Dataset Visualization** | Scatter plot (Applicant Income vs Loan Amount), Base64 API output |
-| **Modern UI Experience** | Responsive design, dynamic styling, smooth animations, gradient interface |
+| **Real-Time Loan Prediction** | Accepts user data, returns loan approval and probability |
+| **ML Pipeline** | Handles missing values, categorical encoding, feature alignment |
+| **Dataset Visualization** | Scatter plot of Applicant Income vs Loan Amount (Base64 API output) |
+| **Modern UI** | Responsive, gradient-based interface, dynamic cards, animations |
 
 ---
 
@@ -81,7 +82,7 @@ User → Frontend → Fetch API → FastAPI Backend → Preprocessing → Logist
 | **Max Iterations** | 2000 |
 | **Outputs** | Approved / Rejected |
 | **Input Features** | Dependents, Education, Self_Employed, Credit_History, Property_Area, Loan_Amount_Term, ApplicantIncome, CoapplicantIncome, LoanAmount |
-| **Preprocessing** | "3+" Dependents normalization, missing value handling, Rupees → Thousands conversion, consistent feature ordering |
+| **Preprocessing** | Fix Dependents (`3+ → 3`), handle missing values, encode categoricals, scale LoanAmount |
 
 ---
 
@@ -120,61 +121,62 @@ User → Frontend → Fetch API → FastAPI Backend → Preprocessing → Logist
   "image": "<base64_encoded_png>"
 }
 ```
-- Dynamically renders dataset visualization on frontend  
+
+- Dynamically renders dataset scatter plot on frontend.
 
 ---
 
 # 🛠 Installation & Setup
 
-### Clone Repository
+### 1️⃣ Clone Repository
 ```bash
 git clone https://github.com/your-username/loan-approval-system.git
-cd loan-approval-system
+cd Loan-Approval-System
 ```
 
-### Backend Setup
+### 2️⃣ Backend Setup
 ```bash
 cd backend
 pip install -r requirements.txt
 uvicorn app:app --reload
 ```
-- Access backend at: `http://127.0.0.1:8000`
+- Backend API runs at `http://127.0.0.1:8000`
 
-### Frontend Setup
+### 3️⃣ Frontend Setup
 
-**Option A – VS Code Live Server:**  
-- Open `index.html` with Live Server  
+**Option A – VS Code Live Server**  
+- Open `index.html` with Live Server.
 
-**Option B – Python Server:**  
+**Option B – Python HTTP Server**
 ```bash
 cd frontend
 python -m http.server 5500
 ```
-- Access frontend at: `http://127.0.0.1:5500`
+- Access frontend at `http://127.0.0.1:5500`
 
-### Model Training
+### 4️⃣ Model Training
 ```bash
 cd backend
 python train_model.py
 ```
 - Trains Logistic Regression  
-- Saves `loan_model.pkl` & `encoders.pkl`  
+- Saves `loan_model.pkl` & `encoders.pkl`
 
 ---
 
 # 🧪 Experimental Model Lab
 
-**Directory:** `/z_filess`  
+**Directory:** `/z_filess/filess`  
 
-| Content | Purpose |
-|---------|---------|
-| Alternate training pipeline | Experimentation |
-| Accuracy evaluation | Model metrics |
-| Feature experimentation | Test new features |
-| Outlier threshold storage | Data quality control |
-| Batch prediction outputs | Evaluate multiple samples |
+| File | Purpose |
+|------|---------|
+| LP_2.py | Alternate training script for experiments |
+| loan_predictions.csv | Batch prediction results |
+| loan_model.pkl | Experimental model |
+| encoders.pkl | Experimental encoders |
+| outliers.pkl | Outlier thresholds for feature preprocessing |
 
-- Supports iterative development prior to production  
+- Supports iterative development prior to production deployment.
 
 ---
 
@@ -193,27 +195,37 @@ This project demonstrates:
 # 📂 Repository Structure
 
 ```
-loan-approval-system/
+Loan-Approval-System/
 │
 ├── backend/
 │   ├── app.py
 │   ├── train_model.py
-│   ├── requirements.txt
-│   └── models/
+│   ├── loan_model.pkl
+│   ├── encoders.pkl
+│   ├── train.csv
+│   └── test.csv
+│
 ├── frontend/
 │   ├── index.html
-│   ├── styles.css
-│   └── scripts.js
+│   ├── script.js
+│   └── style.css
+│
 └── z_filess/
-    ├── alternate_pipeline.py
-    └── batch_outputs/
+    └── filess/
+        ├── LP_2.py
+        ├── loan_predictions.csv
+        ├── loan_model.pkl
+        ├── encoders.pkl
+        └── outliers.pkl
 ```
 
 ---
 
 # 📈 Screenshots (Optional)
 
-- Include live frontend, API response, and dataset plots here for better documentation visuals.
+- Frontend UI view  
+- Prediction result cards  
+- Scatter plot visualization  
 
 ---
 
